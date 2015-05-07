@@ -1,0 +1,30 @@
+{
+  "name": "http-server-with-simple-persistence",
+  "version": "0.1.0",
+  "description": "JS Dev Accelerator assignment to create http server with simple persistence",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrbgit/http-server-with-simple-persistence.git"
+  },
+  "author": "Michael Bowen",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/mrbgit/http-server-with-simple-persistence/issues"
+  },
+  "homepage": "https://github.com/mrbgit/http-server-with-simple-persistence#readme",
+  "devDependencies": {
+    "chai": "^2.3.0",
+    "chai-http": "^1.0.0",
+    "grunt": "^0.4.5",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-jscs": "^1.8.0",
+    "grunt-simple-mocha": "^0.4.0"
+  },
+  "dependencies": {
+    "express": "^4.12.3"
+  }
+}
