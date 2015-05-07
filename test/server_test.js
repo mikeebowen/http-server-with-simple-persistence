@@ -8,7 +8,7 @@ chai.use(chaihttp);
 var expect = chai.expect;
 var Drink = require('../models/Drink.js');
 
-describe('Server Test', function () {
+describe('Test that pages load', function () {
   it('Should have status 200', function (done) {
     chai.request('localhost:3000')
     .get('/')
