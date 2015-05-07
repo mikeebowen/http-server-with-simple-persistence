@@ -8,7 +8,8 @@ var fs = require('fs');
 var port = process.env.PORT || 3000;
 var startTime = new Date();
 
-// app.use(express.static(__dirname));
+require('./lib/drinks_router.js')(drinkRoutes);
+app.use('/api', drinkRoutes);
 
 app.get('/', function (req, res) {
   res.send('This should be the root');
