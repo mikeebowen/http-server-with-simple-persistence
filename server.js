@@ -3,8 +3,6 @@
 var express = require('express');
 var app = express();
 var drinkRoutes = express.Router();
-var bodyparser = require('body-parser');
-var fs = require('fs');
 var port = process.env.PORT || 3000;
 var startTime = new Date();
 
