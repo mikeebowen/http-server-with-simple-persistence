@@ -69,6 +69,17 @@ describe('Test Requests', function () {
     done();
   });
 
+  it('PATCH should edit a file', function (done){
+    chai.request('localhost:3000')
+    .patch('/api/drinks/test')
+    .send({name: 'Long Island', ingredients: 'lots of booze'})
+    .end(function (err, res) {
+      expect(err).to.eql(null);
+      expect(res.body.msg).to.eql('drink-test.JSON' + ' has been changed');
+      done();
+    })
+  })
+
   it('DELETE Should delete a file', function (done) {
     chai.request('localhost:3000')
     .del('/api/drinks/test')
