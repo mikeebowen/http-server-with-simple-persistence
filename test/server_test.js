@@ -23,7 +23,7 @@ describe('Test that pages load', function () {
 })
 
 describe('Test Requests', function () {
-  it('Should create a new drink with POST request', function (done) {
+  it('POST should create a new drink file', function (done) {
     chai.request('localhost:3000')
     .post('/api/drinks')
     .send({id: 0, name: 'martini', ingredients: 'vodka'})
@@ -36,7 +36,7 @@ describe('Test Requests', function () {
     })
   });
 
-  it('Should respond to GET Request with list of drink files',  function (done) {
+  it('GET request should respond with a list of drink files',  function (done) {
     chai.request('localhost:3000')
     .get('/api/drinks')
     .end(function (err, res) {
@@ -56,12 +56,23 @@ describe('Test Requests', function () {
     done();
   });
 
-  it('Should delete a file', function (done) {
+  it('DELETE Should delete a file', function (done) {
     chai.request('localhost:3000')
     .del('/api/drinks/0')
     .end(function (err, res) {
       expect(err).to.eql(null);
       expect(res.body.msg).to.eql('removed file: ./data/drink-0.JSON');
+      done();
+    })
+  })
+
+  it('PUT should replace a file only if it already exists', function (done) {
+    chai.request('localhost:3000')
+    .put('/api/drinks/blah')
+    .send({name: 'whiskey', ingredients: 'brown liquor'})
+    .end(function (err, res) {
+      expect(err).to.eql(null);
+      expect(res.body.msg).to.eql('file does not exist');
       done();
     })
   })
