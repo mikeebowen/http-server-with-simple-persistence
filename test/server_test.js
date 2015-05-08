@@ -44,5 +44,25 @@ describe('Test Requests', function () {
       expect(Array.isArray(res.body)).to.eql(true);
       done();
     })
+  });
+
+  before(function (done) {
+    fs.writeFile('./data/drink-0.JSON', function (err, res) {
+      if (err) {
+        console.log(err);
+        return res.status(500).json({msg: 'server error'});
+      }
+    })
+    done();
+  });
+
+  it('Should delete a file', function (done) {
+    chai.request('localhost:3000')
+    .del('/api/drinks/0')
+    .end(function (err, res) {
+      expect(err).to.eql(null);
+      expect(res.body.msg).to.eql('removed file: ./data/drink-0.JSON');
+      done();
+    })
   })
 })
