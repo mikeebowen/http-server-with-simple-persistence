@@ -18,22 +18,23 @@ describe('Test that pages load', function () {
       expect(err).to.eql(null);
       expect(res.status).to.eql(200);
       done();
-    })
-  })
-})
+    });
+  });
+});
 
 describe('Test Requests', function () {
+
   it('POST should create a new drink file', function (done) {
     chai.request('localhost:3000')
     .post('/api/drinks')
-    .send({id: 0, name: 'martini', ingredients: 'vodka'})
+    .send({id: 'test', name: 'martini', ingredients: 'vodka'})
     .end(function (err, res) {
       expect(err).to.eql(null);
-      expect(res.body.id).to.eql(1);
+      expect(res.body.id).to.eql('test');
       expect(res.body.name).to.eql('martini');
       expect(res.body.ingredients).to.eql('vodka');
       done();
-    })
+    });
   });
 
   it('GET request should respond with a list of drink files',  function (done) {
@@ -43,28 +44,8 @@ describe('Test Requests', function () {
       expect(err).to.eql(null);
       expect(Array.isArray(res.body)).to.eql(true);
       done();
-    })
+    });
   });
-
-  before(function (done) {
-    fs.writeFile('./data/drink-0.JSON', function (err, res) {
-      if (err) {
-        console.log(err);
-        return res.status(500).json({msg: 'server error'});
-      }
-    })
-    done();
-  });
-
-  it('DELETE Should delete a file', function (done) {
-    chai.request('localhost:3000')
-    .del('/api/drinks/0')
-    .end(function (err, res) {
-      expect(err).to.eql(null);
-      expect(res.body.msg).to.eql('removed file: ./data/drink-0.JSON');
-      done();
-    })
-  })
 
   it('PUT should replace a file only if it already exists', function (done) {
     chai.request('localhost:3000')
@@ -74,6 +55,27 @@ describe('Test Requests', function () {
       expect(err).to.eql(null);
       expect(res.body.msg).to.eql('file does not exist');
       done();
-    })
-  })
+    });
+  });
+
+  it('PUT should replace an existing file', function (done) {
+    chai.request('localhost:3000')
+    .put('/api/drinks/test')
+    .send({name: 'cuba libre', ingredients: 'rum and coke with a lime'})
+    .end(function (err, res) {
+      expect(err).to.eql(null);
+      expect(res.body.msg).to.eql('./data/drink-test.JSON has been replaced');
+    });
+    done();
+  });
+
+  it('DELETE Should delete a file', function (done) {
+    chai.request('localhost:3000')
+    .del('/api/drinks/test')
+    .end(function (err, res) {
+      expect(err).to.eql(null);
+      expect(res.body.msg).to.eql('removed file: ./data/drink-test.JSON');
+      done();
+    });
+  });
 })
