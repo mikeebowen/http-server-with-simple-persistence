@@ -9,7 +9,6 @@ var expect = chai.expect;
 
 require('../server.js');
 
-
 describe('Test that pages load', function () {
   it('Should have status 200', function (done) {
     chai.request('localhost:3000')
@@ -69,7 +68,7 @@ describe('Test Requests', function () {
     done();
   });
 
-  it('PATCH should edit a file', function (done){
+  it('PATCH should edit a file', function (done) {
     chai.request('localhost:3000')
     .patch('/api/drinks/test')
     .send({name: 'Long Island', ingredients: 'lots of booze'})
